@@ -9,6 +9,7 @@
   * [Accessing item metadata (properties)](#accessing-item-metadata-properties)
   * [Accessing item extracted text and binary content](#accessing-item-extracted-text-and-binary-content)
   * [Modifying item properties](#modifying-item-properties)
+* [API reference](#api-reference)
 * [Current limitations](#current-limitations)
 
 ## Introduction
@@ -214,6 +215,10 @@ def itemProcessed(self, item):
     <...>
     return ProcessedItemResult(action=Action.Include, modifiedItem=item, tags=tags, customColumns=[c1, c2])
 ```
+
+## API reference
+
+The file [scripting.thrift](api/scripting.thrift) contains the full API reference including the complete list of metadata fields.
 
 ## Current limitations
 
