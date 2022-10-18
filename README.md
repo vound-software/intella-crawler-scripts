@@ -197,9 +197,17 @@ def itemProcessed(self, item):
 
 Custom columns don’t need to be created beforehand. The script will create any missing custom column automatically.
 
+It is possible to tag, modify properties and add custom columns at the same time. Just add the required parameters to the result object:
+```python
+def itemProcessed(self, item):
+    <...>
+    return ProcessedItemResult(action=Action.Include, modifiedItem=item, tags=tags, customColumns=[c1, c2])
+```
+
 ## Current limitations
 
 The current implementation of crawler scripts has certain limitations that you should be aware of:
-* **Duplicates.** Crawler script will only be invoked for original items and never for duplicates. Any decision that the script makes for the original item will automatically be applied to all duplicates.If the script skips an item all of its duplicates will be skipped automatically. Any tag, custom column or other type of modifications will also be applied to duplicates.
-* **Global variables.** Crawler scripts can use any features of the supported languages but it’s important to know that different crawlers will use different instances of the crawler script. That means that if the script in crawler 1 makes a change to a global variable, another instance of the script in crawler 2 will not see it. Therefore communication between different crawlers is currently limited. To overcome this limitation an external database like SQLite can be used.
-* **Performance.** Please be careful when using external services from a crawler script. Crawler script is invoked for each original item. Adding unnecessary delays to the script may hurt indexing performance. Crawler script statistics will be printed in the log file when the indexing is finished. It will tell how much time was spent in a script: total and per item. In future versions asynchronous execution of the script may be added to mitigate slow scripts.
+* **Duplicates.** Crawler script will only be invoked for original items and never for exact (MD5) duplicates. Any decision that the script makes for the original item will automatically be applied to all duplicates.If the script skips an item all of its duplicates will be skipped automatically. Any tag, custom column or other type of modifications will also be applied to duplicates. Message hash is not taken into account when determining duplicates during indexing.
+* **Global variables.** Crawler scripts can use any features of the supported languages, but it’s important to know that different crawlers will use different instances of the crawler script. That means that if the script in crawler 1 makes a change to a global variable, another instance of the script in crawler 2 will not see it. Therefore, communication between different crawlers is currently limited. To overcome this limitation an external database like SQLite can be used. Note that each crawler can use up to 4 parallel processing threads. All these threads share the same script instance.
+* **Performance.** Please be careful when using external services from a crawler script. Crawler script is invoked for each original item. Adding unnecessary delays to the script may hurt indexing performance. Crawler script statistics will be printed in the log file when the indexing is finished. It will tell how much time was spent in a script: total and per item. In future versions asynchronous execution of the script may be added to mitigate scripts whose execution incur some level of latency, e.g. due to accessing cloud services.
+* Files encountered by a crawler may be pushed to another crawler. E.g. when a crawler processing a disk image encounters a PST. There is no guarantee that items are processed by the same script instance as their parents.
