@@ -1,5 +1,16 @@
 # Intella crawler scripts
 
+### Table of Contents  
+* [Introduction](#introduction)
+* [Script structure](#script-structure)
+* [Supported languages](#supported-languages)
+* [Sample script](#sample-script)
+* [Supported features](#supported-features)
+  * [Accessing item metadata (properties)](#accessing-item-metadata-properties)
+  * [Accessing item extracted text and binary content](#accessing-item-extracted-text-and-binary-content)
+  * [Modifying item properties](#modifying-item-properties)
+* [Current limitations](#current-limitations)
+
 ## Introduction
 
 Crawler script is a user defined script that will be executed during indexing for each processed item. It allows customization of data processing by invoking additional logic. Typical use cases are:
