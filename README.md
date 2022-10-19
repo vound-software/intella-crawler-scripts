@@ -137,7 +137,7 @@ public class SampleScriptServiceImpl extends ScriptServiceImpl {
 
 ### Accessing item metadata (properties)
 
-Only a limited number of metadata fields can be accessed in `itemFound` method. That includes fields such as file name, size, type, MD5 hash. However, a much larger list of fields is available in `itemProcessed` method. Please see the full list of supported fields in each method in the scripting.thrift file. See `FoundItem` class for the fields available in `itemFound` method and `ProcessedItem` class for the fields in `itemProcessed` method.
+Only a limited number of metadata fields can be accessed in `itemFound` method. That includes fields such as file name, size, type, MD5 hash. However, a much larger list of fields is available in `itemProcessed` method. Please see the full list of supported fields in each method in the [scripting.thrift](api/scripting.thrift) file. See `FoundItem` class for the fields available in `itemFound` method and `ProcessedItem` class for the fields in `itemProcessed` method.
 
 ### Accessing item extracted text and binary content
 
