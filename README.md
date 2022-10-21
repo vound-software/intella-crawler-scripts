@@ -4,11 +4,13 @@
 * [Introduction](#introduction)
 * [Script structure](#script-structure)
 * [Supported languages](#supported-languages)
-* [Sample script](#sample-script)
 * [Supported features](#supported-features)
   * [Accessing item metadata (properties)](#accessing-item-metadata-properties)
   * [Accessing item extracted text and binary content](#accessing-item-extracted-text-and-binary-content)
   * [Modifying item properties](#modifying-item-properties)
+* [Sample scripts](#sample-scripts)
+  * [Basic](#basic)
+  * [Advanced](#advanced)
 * [API reference](#api-reference)
 * [Current limitations](#current-limitations)
 
@@ -66,71 +68,6 @@ Python scripts can use Python 3.10 syntax and core features. Python does not nee
 
 ```
 > .\python -m pip install requests
-```
-
-## Sample script
-
-The following script can be used to filter out items with a specific MD5 hash and emails that came from a specific IP address. The MD5 check can be done in either method, but it’s more efficient in the itemFound method. The IP address check can only be done in the itemProcessed method because the item needs to be processed to have full metadata.
-
-Python version:
-
-```python
-class ScriptHandler(ScriptService.Iface):
-
-    def itemFound(self, item):
-        if item.md5 == "b4ce732f6e31d0384558e3e46437dae6":
-            return FoundItemResult(action=Action.Skip)
-
-       return FoundItemResult(action=Action.Include)
-
-    def itemProcessed(self, item):
-        if item.mediaType == "message/rfc822" and item.sourceIP == "213.176.226.102":
-            return ProcessedItemResult(action=Action.Skip)
-
-       return ProcessedItemResult(action=Action.Include)
-```
-
-Groovy version:
-
-```groovy
-class SampleScriptServiceImpl extends ScriptServiceImpl {
-
-    FoundItemResult itemFound(FoundItem item) {
-        if (item.md5 == "b4ce732f6e31d0384558e3e46437dae6") {
-            return new FoundItemResult().setAction(Action.Skip);
-        }
-        return new FoundItemResult().setAction(Action.Include);
-    }
-
-    ProcessedItemResult itemProcessed(ProcessedItem item) {
-        if (item.mediaType == "message/rfc822" && item.sourceIP == "213.176.226.102") {
-            return new ProcessedItemResult().setAction(Action.Skip);
-        }
-        return new ProcessedItemResult().setAction(Action.Include);
-    }
-}
-```
-
-Java version:
-```java
-public class SampleScriptServiceImpl extends ScriptServiceImpl {
-
-	@Override
-	public FoundItemResult itemFound(FoundItem item) {
-		if ("b4ce732f6e31d0384558e3e46437dae6".equals(item.md5)) {
-			return new FoundItemResult().setAction(Action.Skip);
-		}
-		return new FoundItemResult().setAction(Action.Include);
-	}
-
-	@Override
-	public ProcessedItemResult itemProcessed(ProcessedItem item) {
-		if ("message/rfc822".equals(item.mediaType) && "213.176.226.102".equals(item.sourceIP)) {
-			return new ProcessedItemResult().setAction(Action.Skip);
-		}
-		return new ProcessedItemResult().setAction(Action.Include);
-	}
-}
 ```
 
 ## Supported features
@@ -216,9 +153,85 @@ def itemProcessed(self, item):
     return ProcessedItemResult(action=Action.Include, modifiedItem=item, tags=tags, customColumns=[c1, c2])
 ```
 
+## Sample scripts
+
+### Basic
+
+The following script can be used to filter out items with a specific MD5 hash and emails that came from a specific IP address. The MD5 check can be done in either method, but it’s more efficient in the itemFound method. The IP address check can only be done in the itemProcessed method because the item needs to be processed to have full metadata.
+
+Python version (see full version: [filter_md5.py](samples/basic/filter_md5.py)):
+
+```python
+class ScriptHandler(ScriptService.Iface):
+
+    def itemFound(self, item):
+        if item.md5 == "b4ce732f6e31d0384558e3e46437dae6":
+            return FoundItemResult(action=Action.Skip)
+
+       return FoundItemResult(action=Action.Include)
+
+    def itemProcessed(self, item):
+        if item.mediaType == "message/rfc822" and item.sourceIP == "213.176.226.102":
+            return ProcessedItemResult(action=Action.Skip)
+
+       return ProcessedItemResult(action=Action.Include)
+```
+
+Groovy version (see full version: [filter_md5.groovy](samples/basic/filter_md5.groovy)):
+
+```groovy
+class SampleScriptServiceImpl extends ScriptServiceImpl {
+
+    FoundItemResult itemFound(FoundItem item) {
+        if (item.md5 == "b4ce732f6e31d0384558e3e46437dae6") {
+            return new FoundItemResult().setAction(Action.Skip);
+        }
+        return new FoundItemResult().setAction(Action.Include);
+    }
+
+    ProcessedItemResult itemProcessed(ProcessedItem item) {
+        if (item.mediaType == "message/rfc822" && item.sourceIP == "213.176.226.102") {
+            return new ProcessedItemResult().setAction(Action.Skip);
+        }
+        return new ProcessedItemResult().setAction(Action.Include);
+    }
+}
+```
+
+Java version (see full version: [filter_md5.java](samples/basic/filter_md5.java)):
+```java
+public class SampleScriptServiceImpl extends ScriptServiceImpl {
+
+	@Override
+	public FoundItemResult itemFound(FoundItem item) {
+		if ("b4ce732f6e31d0384558e3e46437dae6".equals(item.md5)) {
+			return new FoundItemResult().setAction(Action.Skip);
+		}
+		return new FoundItemResult().setAction(Action.Include);
+	}
+
+	@Override
+	public ProcessedItemResult itemProcessed(ProcessedItem item) {
+		if ("message/rfc822".equals(item.mediaType) && "213.176.226.102".equals(item.sourceIP)) {
+			return new ProcessedItemResult().setAction(Action.Skip);
+		}
+		return new ProcessedItemResult().setAction(Action.Include);
+	}
+}
+```
+
+### Advanced
+
+This is a collection of more advanced crawler scripts:
+* TODO
+
 ## API reference
 
 The file [scripting.thrift](api/scripting.thrift) contains the full API reference including the complete list of metadata fields.
+
+Here is the list of language specific APIs generated from the thrift file:
+* Python: [python](api/python)
+* Java and Groovy: [java](api/java)
 
 ## Current limitations
 
