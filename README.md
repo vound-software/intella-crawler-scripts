@@ -223,7 +223,8 @@ public class SampleScriptServiceImpl extends ScriptServiceImpl {
 ### Advanced
 
 This is a collection of more advanced crawler scripts:
-* TODO
+* [filter_type.py](samples/advanced/filter_type.py) - Filter items by type or file extension (Windows executables)
+* [filter_domain.py](samples/advanced/filter_domain.py) - Index emails sent to or received from a specific domain only.
 
 ## API reference
 
