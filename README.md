@@ -12,6 +12,7 @@
   * [Basic](#basic)
   * [Advanced](#advanced)
 * [API reference](#api-reference)
+* [Debugging](#debugging)
 * [Current limitations](#current-limitations)
 
 ## Introduction
