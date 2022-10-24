@@ -236,6 +236,15 @@ Here is the list of language specific APIs generated from the thrift file:
 * Python: [python](api/python)
 * Java and Groovy: [java](api/java)
 
+## Debugging
+
+It is possible to debug a script using print-like statements. Intella will show the script output including errors in the case log, for example:
+```python
+def itemProcessed(self, item):
+    print("-- Script -- Processing item with type: " + item.mediaType)
+    return ProcessedItemResult(action=Action.Include)
+```
+
 ## Current limitations
 
 The current implementation of crawler scripts has certain limitations that you should be aware of:
