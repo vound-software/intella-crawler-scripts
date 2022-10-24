@@ -12,7 +12,7 @@ ipv4_pattern = ipv4_number + "\\." + ipv4_number + "\\." + ipv4_number + "\\." +
 
 # Additional validation to catch some invalid IPs
 def validate_ip(ip):
-    return not ip.startswith("0") and not ip.endswith("0")
+    return not ip.startswith("0") and not ip.endswith(".0")
 
 
 # Known private subnets, the list is not complete!
