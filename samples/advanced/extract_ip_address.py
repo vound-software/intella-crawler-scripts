@@ -27,7 +27,7 @@ class ScriptHandler(ScriptService.Iface):
 
     def itemProcessed(self, item):
         custom_columns = []
-        tags = []
+        tags = set()
         ip_set = set()
 
         # extract from text
@@ -49,6 +49,6 @@ class ScriptHandler(ScriptService.Iface):
 
         for ip in ip_set:
             sub_group = "Private" if is_private(ip) else "Public"
-            tags += "Extracted IPs/" + sub_group + "/" + ip
+            tags.add("Extracted IPs/" + sub_group + "/" + ip)
 
         return ProcessedItemResult(action=Action.Include, customColumns=custom_columns, tags=tags)
