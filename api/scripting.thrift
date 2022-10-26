@@ -1,6 +1,6 @@
 namespace java com.vound.intella.scripting.api
 
-const string GENERATOR_VERSION = "1.0.0.3"
+const string GENERATOR_VERSION = "1.0.0.4"
 
 struct ScriptTZonedDateTime {
 	1: i64 epochMili,
@@ -28,7 +28,7 @@ struct FoundItem {
 
 	1: optional i64 id,
 	2: optional string fileName,
-	3: optional string location,
+	3: optional string uri,
 	4: optional string md5, // read-only
 	5: optional i64 size,
    6: optional string mediaType,
@@ -45,7 +45,7 @@ struct ProcessedItem {
 
 	1: optional i64 id,
 	2: optional string fileName,
-	3: optional string location,
+	3: optional string uri,
 	4: optional string md5, // read-only
 	5: optional i64 size,
    6: optional string mediaType,

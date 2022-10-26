@@ -12,4 +12,4 @@ from thrift.TRecursive import fix_spec
 
 import sys
 from .ttypes import *
-GENERATOR_VERSION = "1.0.0.3"
+GENERATOR_VERSION = "1.0.0.4"

@@ -338,7 +338,7 @@ class FoundItem(object):
     Attributes:
      - id
      - fileName
-     - location
+     - uri
      - md5
      - size
      - mediaType
@@ -347,10 +347,10 @@ class FoundItem(object):
     """
 
 
-    def __init__(self, id=None, fileName=None, location=None, md5=None, size=None, mediaType=None, binaryFile=None,):
+    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, binaryFile=None,):
         self.id = id
         self.fileName = fileName
-        self.location = location
+        self.uri = uri
         self.md5 = md5
         self.size = size
         self.mediaType = mediaType
@@ -377,7 +377,7 @@ class FoundItem(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRING:
-                    self.location = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                    self.uri = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
@@ -418,9 +418,9 @@ class FoundItem(object):
             oprot.writeFieldBegin('fileName', TType.STRING, 2)
             oprot.writeString(self.fileName.encode('utf-8') if sys.version_info[0] == 2 else self.fileName)
             oprot.writeFieldEnd()
-        if self.location is not None:
-            oprot.writeFieldBegin('location', TType.STRING, 3)
-            oprot.writeString(self.location.encode('utf-8') if sys.version_info[0] == 2 else self.location)
+        if self.uri is not None:
+            oprot.writeFieldBegin('uri', TType.STRING, 3)
+            oprot.writeString(self.uri.encode('utf-8') if sys.version_info[0] == 2 else self.uri)
             oprot.writeFieldEnd()
         if self.md5 is not None:
             oprot.writeFieldBegin('md5', TType.STRING, 4)
@@ -461,7 +461,7 @@ class ProcessedItem(object):
     Attributes:
      - id
      - fileName
-     - location
+     - uri
      - md5
      - size
      - mediaType
@@ -530,10 +530,10 @@ class ProcessedItem(object):
     """
 
 
-    def __init__(self, id=None, fileName=None, location=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None,):
+    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None,):
         self.id = id
         self.fileName = fileName
-        self.location = location
+        self.uri = uri
         self.md5 = md5
         self.size = size
         self.mediaType = mediaType
@@ -620,7 +620,7 @@ class ProcessedItem(object):
                     iprot.skip(ftype)
             elif fid == 3:
                 if ftype == TType.STRING:
-                    self.location = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                    self.uri = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
@@ -1071,9 +1071,9 @@ class ProcessedItem(object):
             oprot.writeFieldBegin('fileName', TType.STRING, 2)
             oprot.writeString(self.fileName.encode('utf-8') if sys.version_info[0] == 2 else self.fileName)
             oprot.writeFieldEnd()
-        if self.location is not None:
-            oprot.writeFieldBegin('location', TType.STRING, 3)
-            oprot.writeString(self.location.encode('utf-8') if sys.version_info[0] == 2 else self.location)
+        if self.uri is not None:
+            oprot.writeFieldBegin('uri', TType.STRING, 3)
+            oprot.writeString(self.uri.encode('utf-8') if sys.version_info[0] == 2 else self.uri)
             oprot.writeFieldEnd()
         if self.md5 is not None:
             oprot.writeFieldBegin('md5', TType.STRING, 4)
@@ -1782,7 +1782,7 @@ FoundItem.thrift_spec = (
     None,  # 0
     (1, TType.I64, 'id', None, None, ),  # 1
     (2, TType.STRING, 'fileName', 'UTF8', None, ),  # 2
-    (3, TType.STRING, 'location', 'UTF8', None, ),  # 3
+    (3, TType.STRING, 'uri', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'md5', 'UTF8', None, ),  # 4
     (5, TType.I64, 'size', None, None, ),  # 5
     (6, TType.STRING, 'mediaType', 'UTF8', None, ),  # 6
@@ -1837,7 +1837,7 @@ ProcessedItem.thrift_spec = (
     None,  # 0
     (1, TType.I64, 'id', None, None, ),  # 1
     (2, TType.STRING, 'fileName', 'UTF8', None, ),  # 2
-    (3, TType.STRING, 'location', 'UTF8', None, ),  # 3
+    (3, TType.STRING, 'uri', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'md5', 'UTF8', None, ),  # 4
     (5, TType.I64, 'size', None, None, ),  # 5
     (6, TType.STRING, 'mediaType', 'UTF8', None, ),  # 6
