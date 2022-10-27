@@ -24,31 +24,46 @@ Crawler script is a user defined script that will be executed during indexing fo
 
 ## Script structure
 
-Crawler script consists of a single class with two methods:
+Crawler script consists of a single class with four methods:
+* `init`
 * `itemFound`
 * `itemProcessed`
+* `shutdown`
 
-The first method, `itemFound`, is called when a new item is found but has not been processed yet by the indexing engine. That means most of its properties are still unknown. Only the basic information can be accessed at this stage such as file name, size, md5 hash, location, type and so on. The main purpose of this method is filtering out unwanted items before they are processed in order to reduce indexing time.
+The first method, `init`, is called when a script instance is initialized. This can be used to establish a database connection, open local files and so on. It's only called once per script instance (crawler).
 
-The second method, `itemProcessed`, is called when the item has been fully processed but has not been added to the Intella database yet. Full metadata and extracted text are available at this stage.
+The second method, `itemFound`, is called when a new item is found but has not been processed yet by the indexing engine. That means most of its properties are still unknown. Only the basic information can be accessed at this stage such as file name, size, md5 hash, location, type and so on. The main purpose of this method is filtering out unwanted items before they are processed in order to reduce indexing time.
 
-In both methods the script must return a value (action) that represents what needs to be done with the item:
+The third method, `itemProcessed`, is called when the item has been fully processed but has not been added to the Intella database yet. Full metadata and extracted text are available at this stage.
+
+In both methods, `itemFound` and `itemProcessed`, and  the script must return a value (action) that represents what needs to be done with the item:
 * **Include** means that the item and all of its descendants should be fully processed and added to the database.
 * **Skip** means that the item and all of its descendants should be skipped from processing completely. Text and binary content for this item will not be stored.
 * **Stub** means that only the minimal metadata will be added to the case (file name, size, type), but its text and binary will not be stored in the case. The item itself and its descendants will still be fully processed. All descendants will be indexed in full.
 
 If the item is skipped in `itemFound` method Intella will not process the item at all. As a result, `itemProcessed` method for such an item will not be called. That might save some indexing time.
 
+The last method, `shutdown`, is called when a script instance is shut down. This can be used to clean up resources, close opened files. It's only called once per script instance (crawler).
+
+The `init` and `shutdown` methods are optional and can be omitted.
+
 The simplest possible crawler script is shown below (Python version, import declarations skipped). It does nothing and includes all items.
 
 ```python
 class ScriptHandler(ScriptService.Iface):
+
+    def init(self):
+        pass
 
     def itemFound(self, item):
         return FoundItemResult(action=Action.Include)
 
     def itemProcessed(self, item):
         return ProcessedItemResult(action=Action.Include)
+    
+    def shutdown(self):
+        pass
+
 ```
 
 ## Supported languages
