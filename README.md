@@ -228,6 +228,7 @@ This is a collection of more advanced crawler scripts:
 * [filter_domain.py](samples/advanced/filter_domain.py) - Index emails sent to or received from a specific domain only.
 * [calc_sha256.py](samples/advanced/calc_sha256.py) - Calculate SHA-256 hash for all items and store it as a custom column.
 * [extract_ip_address.py](samples/advanced/extract_ip_address.py) - Extract all IP addresses from item text and message headers using regular expression. Validate the result and store it as a custom column. Also create a tag for each found IP address.
+* [extract_mac.py](samples/advanced/extract_mac.py) - Extract all MAC addresses from item text and raw data using regular expression. Validate the result and store it as a custom column. Also create a tag for each found IP address. Retrieve MAC vendor names from an online source.
 
 ## API reference
 
