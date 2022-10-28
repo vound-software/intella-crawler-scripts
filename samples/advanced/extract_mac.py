@@ -1,4 +1,3 @@
-import json
 from urllib import request
 from api.scripting import ScriptService
 from api.scripting.ScriptService import Action, FoundItemResult, ProcessedItemResult, CustomColumn, CustomColumnType, CustomColumnValue
@@ -9,6 +8,28 @@ import re
 
 # mac pattern following EUI-48 standard
 mac_pattern = re.compile(r"(([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2}))")
+known_vendors = {}
+
+
+def init_vendor_database():
+    with request.urlopen("https://gitlab.com/wireshark/wireshark/-/raw/master/manuf") as response:
+        data = response.read()
+
+        # parse data
+        for line in data.decode('utf-8').splitlines():
+
+            if line.startswith("#"):
+                continue
+
+            line = line.split("\t")
+
+            if len(line[0]) != 8:
+                # add XX:YY:ZZ only
+                continue
+
+            vendor_mac = line[0].upper()
+            vendor_name = line[-1]
+            known_vendors[vendor_mac] = vendor_name
 
 
 def extract_macs(text, mac_set):
@@ -20,10 +41,6 @@ def extract_macs(text, mac_set):
         if validate_mac(mac):
             mac_set.add(mac)
             found = True
-
-        if len(mac_set) >= 10:
-            print("Found 10 mac addresses, exiting")
-            return True
 
     return found
 
@@ -54,22 +71,19 @@ def get_multicast(mac):
 
 # Do api calls to get the mac address vendor at macvendorlookup.com with the first 3 octets of the MAC address
 def get_mac_vendor(mac):
-    url = "https://macvendorlookup.com/api/v2/" + mac[0:8]
-    response = request.urlopen(url)
-    data = response.read()
-    # if the response is not 200, return the response code
-    if response.getcode() != 200:
+    if len(mac) < 8:
+        # filter out invalid values
         return "Unknown"
-    else:
-        text = data.decode('utf-8')
-        json_data = json.loads(text)
-        if json_data[0]["company"] == "":
-            return "Unknown"
-        else:
-            return json_data[0]['company']
+
+    mask = mac.upper().replace("-", ":")[0:8]
+    return known_vendors.get(mask, "Unknown")
 
 
 class ScriptHandler(ScriptService.Iface):
+
+    def init(self):
+        init_vendor_database()
+        print("Initialized known vendor database: " + str(len(known_vendors)) + " vendors")
 
     def itemFound(self, item):
         return FoundItemResult(action=Action.Include)
