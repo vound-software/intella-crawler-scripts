@@ -69,7 +69,6 @@ def get_multicast(mac):
         return "Unicast"
 
 
-# Do api calls to get the mac address vendor at macvendorlookup.com with the first 3 octets of the MAC address
 def get_mac_vendor(mac):
     if len(mac) < 8:
         # filter out invalid values
@@ -114,7 +113,7 @@ class ScriptHandler(ScriptService.Iface):
             for mac in mac_set:
                 # print(" --- " + str(mac))
                 mac_address = mac.upper()
-                mac_vendor = get_mac_vendor(mac)  # http call
+                mac_vendor = get_mac_vendor(mac)
                 mac_type = get_type(mac)
                 mac_multicast = get_multicast(mac)
 
