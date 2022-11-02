@@ -7,7 +7,7 @@ class ScriptHandler(ScriptService.Iface):
     FOLDERS_TO_SKIP = [
         "Windows\\Help",
         "ProgramData\\Microsoft\\Media Player",
-        "Users\\Default"
+        "Users\\Default",
         "Users\\Public"
     ]
 
