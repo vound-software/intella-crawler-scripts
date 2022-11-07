@@ -32,7 +32,7 @@ class ScriptHandler(ScriptService.Iface):
     def itemProcessed(self, item):
         if item.mediaType == "message/rfc822":
             # filter emails by domain
-            if has_email_domain(item, "rustcorp.com.au"):
+            if has_email_domain(item, "gmail.com"):
                 return ProcessedItemResult(action=Action.Include)
             else:
                 return ProcessedItemResult(action=Action.Skip)
