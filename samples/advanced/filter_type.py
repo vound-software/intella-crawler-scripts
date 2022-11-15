@@ -23,7 +23,8 @@
 #
 
 from api.scripting import ScriptService
-from api.scripting.ScriptService import Action, FoundItemResult, ProcessedItemResult
+from api.scripting.ScriptService import (Action, FoundItemResult,
+                                         ProcessedItemResult)
 
 
 def has_file_extension(item, ext):
@@ -40,4 +41,3 @@ class ScriptHandler(ScriptService.Iface):
 
     def itemProcessed(self, item):
         return ProcessedItemResult(action=Action.Include)
-

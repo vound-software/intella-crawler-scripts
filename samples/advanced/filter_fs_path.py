@@ -23,7 +23,8 @@
 #
 
 from api.scripting import ScriptService
-from api.scripting.ScriptService import Action, FoundItemResult, ProcessedItemResult
+from api.scripting.ScriptService import (Action, FoundItemResult,
+                                         ProcessedItemResult)
 
 
 class ScriptHandler(ScriptService.Iface):

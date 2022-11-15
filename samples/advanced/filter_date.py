@@ -22,14 +22,22 @@
 # SOFTWARE.
 #
 
-from api.scripting import ScriptService
-from api.scripting.ScriptService import Action, FoundItemResult, ProcessedItemResult
-
 import datetime
 
-START_DATE_MS = datetime.datetime(2010, 1, 1).timestamp() * 1000
-END_DATE_MS = datetime.datetime(2010, 4, 30).timestamp() * 1000
+from api.scripting import ScriptService
+from api.scripting.ScriptService import (Action, FoundItemResult,
+                                         ProcessedItemResult)
 
+# This example only processes items between now and 30 days ago
+# Start date is one month ago (30 days)
+START_DATE = datetime.datetime.now() - datetime.timedelta(days=30)
+# End date is today
+END_DATE = datetime.datetime.now()
+
+# Another example of how to use the datetime module
+# This example only processes items between 2020-01-01 and 2020-04-30
+# START_DATE_MS = datetime.datetime(2010, 1, 1).timestamp() * 1000
+# END_DATE_MS = datetime.datetime(2010, 4, 30).timestamp() * 1000
 
 def is_item_in_range(item):
     return is_attr_in_range(item.sent) or is_attr_in_range(item.received)

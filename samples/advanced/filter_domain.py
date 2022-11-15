@@ -23,7 +23,8 @@
 #
 
 from api.scripting import ScriptService
-from api.scripting.ScriptService import Action, FoundItemResult, ProcessedItemResult, ProcessedItem
+from api.scripting.ScriptService import (Action, FoundItemResult,
+                                         ProcessedItem, ProcessedItemResult)
 
 
 def has_email_domain(item: ProcessedItem, domain):

@@ -22,10 +22,12 @@
 # SOFTWARE.
 #
 
-from api.scripting import ScriptService
-from api.scripting.ScriptService import Action, FoundItemResult, ProcessedItemResult, CustomColumn, CustomColumnType, CustomColumnValue
-
 import hashlib
+
+from api.scripting import ScriptService
+from api.scripting.ScriptService import (Action, CustomColumn,
+                                         CustomColumnType, CustomColumnValue,
+                                         FoundItemResult, ProcessedItemResult)
 
 
 def sha256(file):

@@ -22,16 +22,17 @@
 # SOFTWARE.
 #
 
-from urllib import request
-from api.scripting import ScriptService
-from api.scripting.ScriptService import Action, FoundItemResult, ProcessedItemResult, CustomColumn, CustomColumnType, CustomColumnValue
-
-from pathlib import Path
-
 import re
+from pathlib import Path
+from urllib import request
+
+from api.scripting import ScriptService
+from api.scripting.ScriptService import (Action, CustomColumn,
+                                         CustomColumnType, CustomColumnValue,
+                                         FoundItemResult, ProcessedItemResult)
 
 # mac pattern following EUI-48 standard
-mac_pattern = re.compile(r"(([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2}))")
+mac_pattern = re.compile(r"(([0-9a-fA-F]{2}[:-]{1}){5}([0-9a-fA-F]{2}))")
 known_vendors = {}
 
 
@@ -41,15 +42,24 @@ def init_vendor_database():
 
         # parse data
         for line in data.decode('utf-8').splitlines():
-
-            if line.startswith("#"):
+            # skip if line is empty or a comment
+            if line.startswith("#") or not line.strip():
                 continue
 
             line = line.split("\t")
-
-            if len(line[0]) != 8:
+            # Do not include mac vendor IEEE Registration Authority
+            if line[-1] == "IEEE Registration Authority":
                 # add XX:YY:ZZ only
                 continue
+            # # remove suffixes from mac addresses (e.g. 38:3A:21:90:00:00/28)
+            if re.search(r"\/\d{2}$", line[0]):
+                line[0] = line[0][:-3]
+                # remove 00 from the end of the mac address
+                if line[0][-2:] == "00":
+                    line[0] = line[0][:-3]
+                    if line[0][-2:] == "00":
+                        line[0] = line[0][:-3]
+
 
             vendor_mac = line[0].upper()
             vendor_name = line[-1]
@@ -95,12 +105,13 @@ def get_multicast(mac):
 
 def get_mac_vendor(mac):
     if len(mac) < 8:
-        # filter out invalid values
-        return "Unknown"
-
-    mask = mac.upper().replace("-", ":")[0:8]
-    return known_vendors.get(mask, "Unknown")
-
+        return "Unknown too small"
+    mask = mac.upper().replace("-", ":")
+    # if the mac address matches the beginning of a known vendor
+    for vendor_mac in known_vendors:
+        if mask.startswith(vendor_mac):
+            return known_vendors[vendor_mac]
+    return known_vendors.get(mask, "Unknown") # return "Unknown" if not found
 
 class ScriptHandler(ScriptService.Iface):
 
@@ -135,7 +146,6 @@ class ScriptHandler(ScriptService.Iface):
             mac_vendors = set()
 
             for mac in mac_set:
-                # print(" --- " + str(mac))
                 mac_address = mac.upper()
                 mac_vendor = get_mac_vendor(mac)
                 mac_type = get_type(mac)
