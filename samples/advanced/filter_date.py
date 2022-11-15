@@ -30,9 +30,9 @@ from api.scripting.ScriptService import (Action, FoundItemResult,
 
 # This example only processes items between now and 30 days ago
 # Start date is one month ago (30 days)
-START_DATE = datetime.datetime.now() - datetime.timedelta(days=30)
+START_DATE_MS = datetime.datetime.now() - datetime.timedelta(days=30)
 # End date is today
-END_DATE = datetime.datetime.now()
+END_DATE_MS = datetime.datetime.now()
 
 # Another example of how to use the datetime module
 # This example only processes items between 2020-01-01 and 2020-04-30
