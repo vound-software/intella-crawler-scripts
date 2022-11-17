@@ -13,6 +13,7 @@
   * [Advanced](#advanced)
 * [API reference](#api-reference)
 * [Debugging](#debugging)
+* [Script Log](#script-log)
 * [Current limitations](#current-limitations)
 
 ## Introduction
@@ -265,6 +266,10 @@ def itemProcessed(self, item):
     print("-- Script -- Processing item with type: " + item.mediaType)
     return ProcessedItemResult(action=Action.Include)
 ```
+
+## Script log
+
+When the "Script Log" feature is turned on, Intella will generate a CSV file that contains all decisions made by a crawler script along with some item details. This can be used for either debugging or auditing purposes. A new file is created in the case log folder for each indexing run: `script-log-<DATE_TIME>.csv`
 
 ## Current limitations
 
