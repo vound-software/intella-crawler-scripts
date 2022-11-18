@@ -13,7 +13,8 @@
   * [Advanced](#advanced)
 * [API reference](#api-reference)
 * [Debugging](#debugging)
-* [Script Log](#script-log)
+* [Script log](#script-log)
+* [Error handling](#error-handling)
 * [Current limitations](#current-limitations)
 
 ## Introduction
@@ -270,6 +271,10 @@ def itemProcessed(self, item):
 ## Script log
 
 When the "Script Log" feature is turned on, Intella will generate a CSV file that contains all decisions made by a crawler script along with some item details. This can be used for either debugging or auditing purposes. A new file is created in the case log folder for each indexing run: `script-log-<DATE_TIME>.csv`
+
+## Error handling
+
+If an error occurs during the script execution, the error will be recorded in the exception report and the item will be marked as an "Exception" item (feature facet). Such exception items will be fully processed. If the script log is enabled, the item will be marked as an "Error" in the CSV file (Result: Error). The actual error message (including the stack trace) will be shown in the case log. Error handling will be improved the future versions.
 
 ## Current limitations
 
