@@ -131,7 +131,7 @@ class ScriptHandler(ScriptService.Iface):
 
         # extract from text
         if item.textFile is not None:
-            text = Path(item.textFile).read_text()
+            text = Path(item.textFile).read_text(encoding='utf-8')
             if extract_macs(text, mac_set):
                 found_in_text = True
 

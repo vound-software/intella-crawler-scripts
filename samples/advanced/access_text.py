@@ -4,6 +4,7 @@ from pathlib import Path
 
 
 class ScriptHandler(ScriptService.Iface):
+
     SKIP_TEXT = "text to exclude"
 
     def itemFound(self, item):
@@ -11,7 +12,7 @@ class ScriptHandler(ScriptService.Iface):
 
     def itemProcessed(self, item):
         if item.textFile is not None:
-            text = Path(item.textFile).read_text()
+            text = Path(item.textFile).read_text(encoding='utf-8')
             if self.SKIP_TEXT in text:
                 return ProcessedItemResult(action=Action.Skip)
 

@@ -77,7 +77,7 @@ class ScriptHandler(ScriptService.Iface):
 
         # extract from text
         if item.textFile is not None:
-            text = Path(item.textFile).read_text()
+            text = Path(item.textFile).read_text(encoding='utf-8')
             for ip in re.findall(ipv4_pattern, text):
                 if validate_ip(ip):
                     if is_private(ip):

@@ -98,14 +98,14 @@ Only a limited number of metadata fields can be accessed in `itemFound` method. 
 
 The extracted text of an item can only be accessed in `itemProcessed` method. But the binary content is available in both methods.
 
-To access the extracted text use `item.textFile` property. It contains a path to the extracted text file. Below you can see an example of a script that reads the item text and skips the item if it contains certain text (Python version):
+To access the extracted text use `item.textFile` property. It contains a path to the extracted text file (encoding: UTF-8). Below you can see an example of a script that reads the item text and skips the item if it contains certain text (Python version):
 
 ```python
 SKIP_TEXT = "text to exclude"
 
 def itemProcessed(self, item):
     if item.textFile is not None:
-        text = Path(item.textFile).read_text()
+        text = Path(item.textFile).read_text(encoding='utf-8')
         if self.SKIP_TEXT in text:
             return ProcessedItemResult(action=Action.Skip)
 
