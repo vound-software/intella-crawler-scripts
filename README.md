@@ -8,6 +8,7 @@
   * [Accessing item metadata (properties)](#accessing-item-metadata-properties)
   * [Accessing item extracted text and binary content](#accessing-item-extracted-text-and-binary-content)
   * [Modifying item properties](#modifying-item-properties)
+  * [Accessing family-level information](#accessing-family-level-information)
 * [Sample scripts](#sample-scripts)
   * [Basic](#basic)
   * [Advanced](#advanced)
