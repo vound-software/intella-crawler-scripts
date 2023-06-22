@@ -171,6 +171,24 @@ def itemProcessed(self, item):
     return ProcessedItemResult(action=Action.Include, modifiedItem=item, tags=tags, customColumns=[c1, c2])
 ```
 
+
+### Accessing family-level information
+
+_(Available in Intella 2.6.1 or later)_
+
+To access the family-level information use `item.isTopLevelParent` property. It is `True` for top-level parents. It is `False` for all other items: children or items that don't belong to any family. Examples of top-level parents:
+* File in a folder
+* Email in a PST container
+
+Examples of items that are not top-level parents:
+* Email attachment (including embedded emails)
+* Image embedded in a document
+* PST container
+* Folder in a disk image
+
+`isTopLevelParent` property can be used to take families into account. For example, date filtering can be applied to top-level items only.
+
+
 ## Sample scripts
 
 ### Basic
@@ -246,6 +264,7 @@ This is a collection of more advanced crawler scripts:
   * [filter_domain.py](samples/advanced/filter_domain.py) - Index emails sent to or received from a specific domain only.
   * [filter_date.py](samples/advanced/filter_date.py) - Index emails sent or received withing a specific date range only.
   * [filter_fs_path.py](samples/advanced/filter_fs_path.py) - Filter files in a disk image by path.
+  * [filter_date_toplevel.py](samples/advanced/filter_date_toplevel.py) - Index top-level emails sent or received withing a specific date range only.
 * Data enrichment: 
   * [calc_sha256.py](samples/advanced/calc_sha256.py) - Calculate SHA-256 hash for all items and store it as a custom column.
   * [extract_ip_address.py](samples/advanced/extract_ip_address.py) - Extract all IP addresses from item text and message headers using regular expression. Validate the result and store it as a custom column. Also create a tag for each found IP address.
