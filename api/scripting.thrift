@@ -24,7 +24,7 @@
 
 namespace java com.vound.intella.scripting.api
 
-const string GENERATOR_VERSION = "1.0.0.5"
+const string GENERATOR_VERSION = "1.0.0.6"
 
 struct ScriptTZonedDateTime {
 	1: i64 epochMili,
@@ -57,6 +57,7 @@ struct FoundItem {
 	5: optional i64 size,
    6: optional string mediaType,
    7: optional string fsPath, // file system path, e.g. \Windows\System32 (disk image entries only)
+   8: optional bool isTopLevelParent,
 
    // External resources
 
@@ -90,6 +91,7 @@ struct ProcessedItem {
    20: optional bool orphan, // read-only
    21: optional bool embeddedImage, // read-only
    22: optional string fsPath,  // file system path, e.g. \Windows\System32 (disk image entries only)
+   23: optional bool isTopLevelParent,
 
    // External resources
 

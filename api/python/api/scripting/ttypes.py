@@ -367,12 +367,13 @@ class FoundItem(object):
      - size
      - mediaType
      - fsPath
+     - isTopLevelParent
      - binaryFile
 
     """
 
 
-    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, fsPath=None, binaryFile=None,):
+    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, fsPath=None, isTopLevelParent=None, binaryFile=None,):
         self.id = id
         self.fileName = fileName
         self.uri = uri
@@ -380,6 +381,7 @@ class FoundItem(object):
         self.size = size
         self.mediaType = mediaType
         self.fsPath = fsPath
+        self.isTopLevelParent = isTopLevelParent
         self.binaryFile = binaryFile
 
     def read(self, iprot):
@@ -426,6 +428,11 @@ class FoundItem(object):
                     self.fsPath = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 8:
+                if ftype == TType.BOOL:
+                    self.isTopLevelParent = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
             elif fid == 51:
                 if ftype == TType.STRING:
                     self.binaryFile = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
@@ -468,6 +475,10 @@ class FoundItem(object):
         if self.fsPath is not None:
             oprot.writeFieldBegin('fsPath', TType.STRING, 7)
             oprot.writeString(self.fsPath.encode('utf-8') if sys.version_info[0] == 2 else self.fsPath)
+            oprot.writeFieldEnd()
+        if self.isTopLevelParent is not None:
+            oprot.writeFieldBegin('isTopLevelParent', TType.BOOL, 8)
+            oprot.writeBool(self.isTopLevelParent)
             oprot.writeFieldEnd()
         if self.binaryFile is not None:
             oprot.writeFieldBegin('binaryFile', TType.STRING, 51)
@@ -516,6 +527,7 @@ class ProcessedItem(object):
      - orphan
      - embeddedImage
      - fsPath
+     - isTopLevelParent
      - binaryFile
      - textFile
      - contentCreated
@@ -566,7 +578,7 @@ class ProcessedItem(object):
     """
 
 
-    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, fsPath=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None,):
+    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, fsPath=None, isTopLevelParent=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None,):
         self.id = id
         self.fileName = fileName
         self.uri = uri
@@ -589,6 +601,7 @@ class ProcessedItem(object):
         self.orphan = orphan
         self.embeddedImage = embeddedImage
         self.fsPath = fsPath
+        self.isTopLevelParent = isTopLevelParent
         self.binaryFile = binaryFile
         self.textFile = textFile
         self.contentCreated = contentCreated
@@ -760,6 +773,11 @@ class ProcessedItem(object):
             elif fid == 22:
                 if ftype == TType.STRING:
                     self.fsPath = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 23:
+                if ftype == TType.BOOL:
+                    self.isTopLevelParent = iprot.readBool()
                 else:
                     iprot.skip(ftype)
             elif fid == 51:
@@ -1195,6 +1213,10 @@ class ProcessedItem(object):
         if self.fsPath is not None:
             oprot.writeFieldBegin('fsPath', TType.STRING, 22)
             oprot.writeString(self.fsPath.encode('utf-8') if sys.version_info[0] == 2 else self.fsPath)
+            oprot.writeFieldEnd()
+        if self.isTopLevelParent is not None:
+            oprot.writeFieldBegin('isTopLevelParent', TType.BOOL, 23)
+            oprot.writeBool(self.isTopLevelParent)
             oprot.writeFieldEnd()
         if self.binaryFile is not None:
             oprot.writeFieldBegin('binaryFile', TType.STRING, 51)
@@ -1833,7 +1855,7 @@ FoundItem.thrift_spec = (
     (5, TType.I64, 'size', None, None, ),  # 5
     (6, TType.STRING, 'mediaType', 'UTF8', None, ),  # 6
     (7, TType.STRING, 'fsPath', 'UTF8', None, ),  # 7
-    None,  # 8
+    (8, TType.BOOL, 'isTopLevelParent', None, None, ),  # 8
     None,  # 9
     None,  # 10
     None,  # 11
@@ -1903,7 +1925,7 @@ ProcessedItem.thrift_spec = (
     (20, TType.BOOL, 'orphan', None, None, ),  # 20
     (21, TType.BOOL, 'embeddedImage', None, None, ),  # 21
     (22, TType.STRING, 'fsPath', 'UTF8', None, ),  # 22
-    None,  # 23
+    (23, TType.BOOL, 'isTopLevelParent', None, None, ),  # 23
     None,  # 24
     None,  # 25
     None,  # 26
