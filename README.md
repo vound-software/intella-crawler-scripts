@@ -288,7 +288,7 @@ Here is the list of language specific APIs generated from the thrift file:
 It is possible to debug a script using print-like statements. Intella will show the script output including errors in the case log, for example:
 ```python
 def itemProcessed(self, item):
-    print("-- Script -- Processing item with type: " + item.mediaType)
+    print("-- Script -- Processing item with type: " + str(item.mediaType))
     return ProcessedItemResult(action=Action.Include)
 ```
 
