@@ -270,6 +270,7 @@ This is a collection of more advanced crawler scripts:
   * [calc_sha256.py](samples/advanced/calc_sha256.py) - Calculate SHA-256 hash for all items and store it as a custom column.
   * [extract_ip_address.py](samples/advanced/extract_ip_address.py) - Extract all IP addresses from item text and message headers using regular expression. Validate the result and store it as a custom column. Also create a tag for each found IP address.
   * [extract_mac.py](samples/advanced/extract_mac.py) - Extract all MAC addresses from item text and raw data using regular expression. Validate the result and store it as a custom column. Also create a tag for each found IP address. Retrieve MAC vendor names from an online source.
+  * [access_raw_data.py](samples/advanced/access_raw_data.py) - Extract information from raw data.
 
 Here is an example of data produced by [extract_mac.py](samples/advanced/extract_mac.py) script.
 
