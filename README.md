@@ -271,6 +271,8 @@ This is a collection of more advanced crawler scripts:
   * [extract_ip_address.py](samples/advanced/extract_ip_address.py) - Extract all IP addresses from item text and message headers using regular expression. Validate the result and store it as a custom column. Also create a tag for each found IP address.
   * [extract_mac.py](samples/advanced/extract_mac.py) - Extract all MAC addresses from item text and raw data using regular expression. Validate the result and store it as a custom column. Also create a tag for each found IP address. Retrieve MAC vendor names from an online source.
   * [access_raw_data.py](samples/advanced/access_raw_data.py) - Extract information from raw data.
+  * [detect_grayscale.py](samples/advanced/detect_grayscale.py) - Detect grayscale images using OpenCV.
+  * [unfurl_crawler_script.py](samples/advanced/unfurl_crawler_script.py) - Extract metadata from Google search URLs using [unfurl](https://github.com/obsidianforensics/unfurl) library.
 
 Here is an example of data produced by [extract_mac.py](samples/advanced/extract_mac.py) script.
 
