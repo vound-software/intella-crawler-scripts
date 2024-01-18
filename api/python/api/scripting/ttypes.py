@@ -574,11 +574,12 @@ class ProcessedItem(object):
      - chatConversationId
      - intellaChatConversationId
      - chatConversationTitle
+     - visitedUrl
 
     """
 
 
-    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, fsPath=None, isTopLevelParent=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None,):
+    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, fsPath=None, isTopLevelParent=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None, visitedUrl=None,):
         self.id = id
         self.fileName = fileName
         self.uri = uri
@@ -648,6 +649,7 @@ class ProcessedItem(object):
         self.chatConversationId = chatConversationId
         self.intellaChatConversationId = intellaChatConversationId
         self.chatConversationTitle = chatConversationTitle
+        self.visitedUrl = visitedUrl
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1113,6 +1115,11 @@ class ProcessedItem(object):
                     self.chatConversationTitle = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 301:
+                if ftype == TType.STRING:
+                    self.visitedUrl = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1446,6 +1453,10 @@ class ProcessedItem(object):
         if self.chatConversationTitle is not None:
             oprot.writeFieldBegin('chatConversationTitle', TType.STRING, 272)
             oprot.writeString(self.chatConversationTitle.encode('utf-8') if sys.version_info[0] == 2 else self.chatConversationTitle)
+            oprot.writeFieldEnd()
+        if self.visitedUrl is not None:
+            oprot.writeFieldBegin('visitedUrl', TType.STRING, 301)
+            oprot.writeString(self.visitedUrl.encode('utf-8') if sys.version_info[0] == 2 else self.visitedUrl)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -2175,6 +2186,35 @@ ProcessedItem.thrift_spec = (
     (270, TType.STRING, 'chatConversationId', 'UTF8', None, ),  # 270
     (271, TType.STRING, 'intellaChatConversationId', 'UTF8', None, ),  # 271
     (272, TType.STRING, 'chatConversationTitle', 'UTF8', None, ),  # 272
+    None,  # 273
+    None,  # 274
+    None,  # 275
+    None,  # 276
+    None,  # 277
+    None,  # 278
+    None,  # 279
+    None,  # 280
+    None,  # 281
+    None,  # 282
+    None,  # 283
+    None,  # 284
+    None,  # 285
+    None,  # 286
+    None,  # 287
+    None,  # 288
+    None,  # 289
+    None,  # 290
+    None,  # 291
+    None,  # 292
+    None,  # 293
+    None,  # 294
+    None,  # 295
+    None,  # 296
+    None,  # 297
+    None,  # 298
+    None,  # 299
+    None,  # 300
+    (301, TType.STRING, 'visitedUrl', 'UTF8', None, ),  # 301
 )
 all_structs.append(FoundItemResult)
 FoundItemResult.thrift_spec = (

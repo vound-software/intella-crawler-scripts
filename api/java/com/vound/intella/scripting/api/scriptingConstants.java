@@ -33,6 +33,6 @@ package com.vound.intella.scripting.api;
 @SuppressWarnings({"cast", "rawtypes", "serial", "unchecked", "unused"})
 public class scriptingConstants {
 
-  public static final java.lang.String GENERATOR_VERSION = "1.0.0.6";
+  public static final java.lang.String GENERATOR_VERSION = "1.0.0.7";
 
 }

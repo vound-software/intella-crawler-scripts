@@ -24,7 +24,7 @@
 
 namespace java com.vound.intella.scripting.api
 
-const string GENERATOR_VERSION = "1.0.0.6"
+const string GENERATOR_VERSION = "1.0.0.7"
 
 struct ScriptTZonedDateTime {
 	1: i64 epochMili,
@@ -150,6 +150,10 @@ struct ProcessedItem {
 	270: optional string chatConversationId,
 	271: optional string intellaChatConversationId,
 	272: optional string chatConversationTitle,
+
+	// Internet artifacts
+
+	301: optional string visitedUrl,
 
 }
 
