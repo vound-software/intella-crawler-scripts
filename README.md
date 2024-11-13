@@ -267,6 +267,7 @@ This is a collection of more advanced crawler scripts:
   * [filter_fs_path.py](samples/advanced/filter_fs_path.py) - Filter files in a disk image by path.
   * [filter_date_toplevel.py](samples/advanced/filter_date_toplevel.py) - Index top-level emails sent or received withing a specific date range only.
   * [filter_by_type_and_size.py](samples/advanced/filter_by_type_and_size.py) - Exclude items from processing based on their type and size.
+  * [reprocess_excluded_items.py](samples/advanced/reprocess_excluded_items.py) - Reprocess previously excluded item via URI list.
 * Data enrichment: 
   * [calc_sha256.py](samples/advanced/calc_sha256.py) - Calculate SHA-256 hash for all items and store it as a custom column.
   * [calc_multiple_hashes.py](samples/advanced/calc_multiple_hashes.py) - Calculate multiple hashes at once (SHA-1, SHA-256, SHA-512) for all items and store them as custom columns.
@@ -275,8 +276,7 @@ This is a collection of more advanced crawler scripts:
   * [access_raw_data.py](samples/advanced/access_raw_data.py) - Extract information from raw data.
   * [detect_grayscale.py](samples/advanced/detect_grayscale.py) - Detect grayscale images using OpenCV.
   * [unfurl_crawler_script.py](samples/advanced/unfurl_crawler_script.py) - Extract metadata from Google search URLs using [unfurl](https://github.com/obsidianforensics/unfurl) library.
-  * [reprocess_excluded_items.py](samples/advanced/reprocess_excluded_items.py) - Reprocess previously excluded item via URI list.
-
+  
 Here is an example of data produced by [extract_mac.py](samples/advanced/extract_mac.py) script.
 
 ![Advanced Script Demo](images/adavanced_script.png?raw=true "Advanced Script Demo (extract_mac.py)")
