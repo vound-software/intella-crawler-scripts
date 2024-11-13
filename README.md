@@ -275,6 +275,7 @@ This is a collection of more advanced crawler scripts:
   * [access_raw_data.py](samples/advanced/access_raw_data.py) - Extract information from raw data.
   * [detect_grayscale.py](samples/advanced/detect_grayscale.py) - Detect grayscale images using OpenCV.
   * [unfurl_crawler_script.py](samples/advanced/unfurl_crawler_script.py) - Extract metadata from Google search URLs using [unfurl](https://github.com/obsidianforensics/unfurl) library.
+  * [reprocess_excluded_items.py](samples/advanced/reprocess_excluded_items.py) - Reprocess previously excluded item via URI list.
 
 Here is an example of data produced by [extract_mac.py](samples/advanced/extract_mac.py) script.
 
