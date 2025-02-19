@@ -1540,15 +1540,17 @@ class ProcessedItemResult(object):
      - modifiedItem
      - tags
      - customColumns
+     - importedText
 
     """
 
 
-    def __init__(self, action=None, modifiedItem=None, tags=None, customColumns=None,):
+    def __init__(self, action=None, modifiedItem=None, tags=None, customColumns=None, importedText=None,):
         self.action = action
         self.modifiedItem = modifiedItem
         self.tags = tags
         self.customColumns = customColumns
+        self.importedText = importedText
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -1591,6 +1593,11 @@ class ProcessedItemResult(object):
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
+            elif fid == 5:
+                if ftype == TType.STRING:
+                    self.importedText = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -1622,6 +1629,10 @@ class ProcessedItemResult(object):
             for iter125 in self.customColumns:
                 iter125.write(oprot)
             oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        if self.importedText is not None:
+            oprot.writeFieldBegin('importedText', TType.STRING, 5)
+            oprot.writeString(self.importedText.encode('utf-8') if sys.version_info[0] == 2 else self.importedText)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -2228,6 +2239,7 @@ ProcessedItemResult.thrift_spec = (
     (2, TType.STRUCT, 'modifiedItem', [ProcessedItem, None], None, ),  # 2
     (3, TType.SET, 'tags', (TType.STRING, 'UTF8', False), None, ),  # 3
     (4, TType.LIST, 'customColumns', (TType.STRUCT, [CustomColumn, None], False), None, ),  # 4
+    (5, TType.STRING, 'importedText', 'UTF8', None, ),  # 5
 )
 all_structs.append(CustomColumn)
 CustomColumn.thrift_spec = (
