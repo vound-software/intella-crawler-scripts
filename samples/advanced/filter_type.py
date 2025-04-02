@@ -34,10 +34,10 @@ def has_file_extension(item, ext):
 class ScriptHandler(ScriptService.Iface):
 
     def itemFound(self, item):
-        if item.mediaType == "application/x-ms-dos-executable" or has_file_extension(item, "exe"):
-            return FoundItemResult(action=Action.Skip)
-
         return FoundItemResult(action=Action.Include)
 
     def itemProcessed(self, item):
+        if item.mediaType == "application/x-ms-dos-executable" or has_file_extension(item, "exe"):
+            return ProcessedItemResult(action=Action.Skip)
+
         return ProcessedItemResult(action=Action.Include)
