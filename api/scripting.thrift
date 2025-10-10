@@ -58,6 +58,10 @@ struct FoundItem {
    6: optional string mediaType,
    7: optional string fsPath, // file system path, e.g. \Windows\System32 (disk image entries only)
    8: optional bool isTopLevelParent,
+   9: optional list<string> mediaTypeCategories,
+   10: optional string sha1,
+   11: optional string sha256,
+   12: optional string sha512,
 
    // External resources
 
@@ -92,6 +96,10 @@ struct ProcessedItem {
    21: optional bool embeddedImage, // read-only
    22: optional string fsPath,  // file system path, e.g. \Windows\System32 (disk image entries only)
    23: optional bool isTopLevelParent,
+   24: optional list<string> mediaTypeCategories,
+   25: optional string sha1,
+   26: optional string sha256,
+   27: optional string sha512,
 
    // External resources
 
@@ -177,6 +185,8 @@ struct ProcessedItemResult {
 
 	// Custom columns assigned by the script
 	4: optional list<CustomColumn> customColumns,
+   // File to to import text from and append it to item (Will be accessible as imported text)
+	5: optional string importedText,
 
 }
 

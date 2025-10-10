@@ -368,12 +368,16 @@ class FoundItem(object):
      - mediaType
      - fsPath
      - isTopLevelParent
+     - mediaTypeCategories
+     - sha1
+     - sha256
+     - sha512
      - binaryFile
 
     """
 
 
-    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, fsPath=None, isTopLevelParent=None, binaryFile=None,):
+    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, fsPath=None, isTopLevelParent=None, mediaTypeCategories=None, sha1=None, sha256=None, sha512=None, binaryFile=None,):
         self.id = id
         self.fileName = fileName
         self.uri = uri
@@ -382,6 +386,10 @@ class FoundItem(object):
         self.mediaType = mediaType
         self.fsPath = fsPath
         self.isTopLevelParent = isTopLevelParent
+        self.mediaTypeCategories = mediaTypeCategories
+        self.sha1 = sha1
+        self.sha256 = sha256
+        self.sha512 = sha512
         self.binaryFile = binaryFile
 
     def read(self, iprot):
@@ -433,6 +441,31 @@ class FoundItem(object):
                     self.isTopLevelParent = iprot.readBool()
                 else:
                     iprot.skip(ftype)
+            elif fid == 9:
+                if ftype == TType.LIST:
+                    self.mediaTypeCategories = []
+                    (_etype3, _size0) = iprot.readListBegin()
+                    for _i4 in range(_size0):
+                        _elem5 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                        self.mediaTypeCategories.append(_elem5)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 10:
+                if ftype == TType.STRING:
+                    self.sha1 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 11:
+                if ftype == TType.STRING:
+                    self.sha256 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 12:
+                if ftype == TType.STRING:
+                    self.sha512 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             elif fid == 51:
                 if ftype == TType.STRING:
                     self.binaryFile = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
@@ -479,6 +512,25 @@ class FoundItem(object):
         if self.isTopLevelParent is not None:
             oprot.writeFieldBegin('isTopLevelParent', TType.BOOL, 8)
             oprot.writeBool(self.isTopLevelParent)
+            oprot.writeFieldEnd()
+        if self.mediaTypeCategories is not None:
+            oprot.writeFieldBegin('mediaTypeCategories', TType.LIST, 9)
+            oprot.writeListBegin(TType.STRING, len(self.mediaTypeCategories))
+            for iter6 in self.mediaTypeCategories:
+                oprot.writeString(iter6.encode('utf-8') if sys.version_info[0] == 2 else iter6)
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        if self.sha1 is not None:
+            oprot.writeFieldBegin('sha1', TType.STRING, 10)
+            oprot.writeString(self.sha1.encode('utf-8') if sys.version_info[0] == 2 else self.sha1)
+            oprot.writeFieldEnd()
+        if self.sha256 is not None:
+            oprot.writeFieldBegin('sha256', TType.STRING, 11)
+            oprot.writeString(self.sha256.encode('utf-8') if sys.version_info[0] == 2 else self.sha256)
+            oprot.writeFieldEnd()
+        if self.sha512 is not None:
+            oprot.writeFieldBegin('sha512', TType.STRING, 12)
+            oprot.writeString(self.sha512.encode('utf-8') if sys.version_info[0] == 2 else self.sha512)
             oprot.writeFieldEnd()
         if self.binaryFile is not None:
             oprot.writeFieldBegin('binaryFile', TType.STRING, 51)
@@ -528,6 +580,10 @@ class ProcessedItem(object):
      - embeddedImage
      - fsPath
      - isTopLevelParent
+     - mediaTypeCategories
+     - sha1
+     - sha256
+     - sha512
      - binaryFile
      - textFile
      - contentCreated
@@ -579,7 +635,7 @@ class ProcessedItem(object):
     """
 
 
-    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, fsPath=None, isTopLevelParent=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None, visitedUrl=None,):
+    def __init__(self, id=None, fileName=None, uri=None, md5=None, size=None, mediaType=None, encrypted=None, decrypted=None, password=None, certificate=None, rawData=None, contactName=None, nativeID=None, documentID=None, parentDocumentID=None, geoLocation=None, endAttach=None, textSnippet=None, recovered=None, orphan=None, embeddedImage=None, fsPath=None, isTopLevelParent=None, mediaTypeCategories=None, sha1=None, sha256=None, sha512=None, binaryFile=None, textFile=None, contentCreated=None, contentLastModified=None, contentLastAccessed=None, fileCreated=None, fileLastModified=None, fileLastAccessed=None, lastPrinted=None, sent=None, received=None, visited=None, called=None, started=None, ended=None, due=None, deleted=None, title=None, subject=None, pageCount=None, creators=None, contributors=None, organization=None, emptyDocument=None, messageID=None, messageHeaders=None, conversationIndexSet=None, messageFrom=None, messageSenders=None, messageTo=None, messageCc=None, messageBcc=None, chatSenders=None, chatReceivers=None, chatAccounts=None, isRead=None, durationSeconds=None, incomingPhoneNumbers=None, outgoingPhoneNumbers=None, allPhoneNumbers=None, sourceIP=None, messageCount=None, chatProtocol=None, chatConversationId=None, intellaChatConversationId=None, chatConversationTitle=None, visitedUrl=None,):
         self.id = id
         self.fileName = fileName
         self.uri = uri
@@ -603,6 +659,10 @@ class ProcessedItem(object):
         self.embeddedImage = embeddedImage
         self.fsPath = fsPath
         self.isTopLevelParent = isTopLevelParent
+        self.mediaTypeCategories = mediaTypeCategories
+        self.sha1 = sha1
+        self.sha256 = sha256
+        self.sha512 = sha512
         self.binaryFile = binaryFile
         self.textFile = textFile
         self.contentCreated = contentCreated
@@ -713,11 +773,11 @@ class ProcessedItem(object):
             elif fid == 11:
                 if ftype == TType.LIST:
                     self.rawData = []
-                    (_etype3, _size0) = iprot.readListBegin()
-                    for _i4 in range(_size0):
-                        _elem5 = RawDataEntry()
-                        _elem5.read(iprot)
-                        self.rawData.append(_elem5)
+                    (_etype10, _size7) = iprot.readListBegin()
+                    for _i11 in range(_size7):
+                        _elem12 = RawDataEntry()
+                        _elem12.read(iprot)
+                        self.rawData.append(_elem12)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -780,6 +840,31 @@ class ProcessedItem(object):
             elif fid == 23:
                 if ftype == TType.BOOL:
                     self.isTopLevelParent = iprot.readBool()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 24:
+                if ftype == TType.LIST:
+                    self.mediaTypeCategories = []
+                    (_etype16, _size13) = iprot.readListBegin()
+                    for _i17 in range(_size13):
+                        _elem18 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                        self.mediaTypeCategories.append(_elem18)
+                    iprot.readListEnd()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 25:
+                if ftype == TType.STRING:
+                    self.sha1 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 26:
+                if ftype == TType.STRING:
+                    self.sha256 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 27:
+                if ftype == TType.STRING:
+                    self.sha512 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 51:
@@ -900,22 +985,22 @@ class ProcessedItem(object):
             elif fid == 204:
                 if ftype == TType.LIST:
                     self.creators = []
-                    (_etype9, _size6) = iprot.readListBegin()
-                    for _i10 in range(_size6):
-                        _elem11 = PersonAccount()
-                        _elem11.read(iprot)
-                        self.creators.append(_elem11)
+                    (_etype22, _size19) = iprot.readListBegin()
+                    for _i23 in range(_size19):
+                        _elem24 = PersonAccount()
+                        _elem24.read(iprot)
+                        self.creators.append(_elem24)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 205:
                 if ftype == TType.LIST:
                     self.contributors = []
-                    (_etype15, _size12) = iprot.readListBegin()
-                    for _i16 in range(_size12):
-                        _elem17 = PersonAccount()
-                        _elem17.read(iprot)
-                        self.contributors.append(_elem17)
+                    (_etype28, _size25) = iprot.readListBegin()
+                    for _i29 in range(_size25):
+                        _elem30 = PersonAccount()
+                        _elem30.read(iprot)
+                        self.contributors.append(_elem30)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -942,98 +1027,98 @@ class ProcessedItem(object):
             elif fid == 253:
                 if ftype == TType.SET:
                     self.conversationIndexSet = set()
-                    (_etype21, _size18) = iprot.readSetBegin()
-                    for _i22 in range(_size18):
-                        _elem23 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
-                        self.conversationIndexSet.add(_elem23)
+                    (_etype34, _size31) = iprot.readSetBegin()
+                    for _i35 in range(_size31):
+                        _elem36 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                        self.conversationIndexSet.add(_elem36)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 254:
                 if ftype == TType.SET:
                     self.messageFrom = set()
-                    (_etype27, _size24) = iprot.readSetBegin()
-                    for _i28 in range(_size24):
-                        _elem29 = PersonAccount()
-                        _elem29.read(iprot)
-                        self.messageFrom.add(_elem29)
+                    (_etype40, _size37) = iprot.readSetBegin()
+                    for _i41 in range(_size37):
+                        _elem42 = PersonAccount()
+                        _elem42.read(iprot)
+                        self.messageFrom.add(_elem42)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 255:
                 if ftype == TType.SET:
                     self.messageSenders = set()
-                    (_etype33, _size30) = iprot.readSetBegin()
-                    for _i34 in range(_size30):
-                        _elem35 = PersonAccount()
-                        _elem35.read(iprot)
-                        self.messageSenders.add(_elem35)
+                    (_etype46, _size43) = iprot.readSetBegin()
+                    for _i47 in range(_size43):
+                        _elem48 = PersonAccount()
+                        _elem48.read(iprot)
+                        self.messageSenders.add(_elem48)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 256:
                 if ftype == TType.SET:
                     self.messageTo = set()
-                    (_etype39, _size36) = iprot.readSetBegin()
-                    for _i40 in range(_size36):
-                        _elem41 = PersonAccount()
-                        _elem41.read(iprot)
-                        self.messageTo.add(_elem41)
+                    (_etype52, _size49) = iprot.readSetBegin()
+                    for _i53 in range(_size49):
+                        _elem54 = PersonAccount()
+                        _elem54.read(iprot)
+                        self.messageTo.add(_elem54)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 257:
                 if ftype == TType.SET:
                     self.messageCc = set()
-                    (_etype45, _size42) = iprot.readSetBegin()
-                    for _i46 in range(_size42):
-                        _elem47 = PersonAccount()
-                        _elem47.read(iprot)
-                        self.messageCc.add(_elem47)
+                    (_etype58, _size55) = iprot.readSetBegin()
+                    for _i59 in range(_size55):
+                        _elem60 = PersonAccount()
+                        _elem60.read(iprot)
+                        self.messageCc.add(_elem60)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 258:
                 if ftype == TType.SET:
                     self.messageBcc = set()
-                    (_etype51, _size48) = iprot.readSetBegin()
-                    for _i52 in range(_size48):
-                        _elem53 = PersonAccount()
-                        _elem53.read(iprot)
-                        self.messageBcc.add(_elem53)
+                    (_etype64, _size61) = iprot.readSetBegin()
+                    for _i65 in range(_size61):
+                        _elem66 = PersonAccount()
+                        _elem66.read(iprot)
+                        self.messageBcc.add(_elem66)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 259:
                 if ftype == TType.SET:
                     self.chatSenders = set()
-                    (_etype57, _size54) = iprot.readSetBegin()
-                    for _i58 in range(_size54):
-                        _elem59 = PersonAccount()
-                        _elem59.read(iprot)
-                        self.chatSenders.add(_elem59)
+                    (_etype70, _size67) = iprot.readSetBegin()
+                    for _i71 in range(_size67):
+                        _elem72 = PersonAccount()
+                        _elem72.read(iprot)
+                        self.chatSenders.add(_elem72)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 260:
                 if ftype == TType.SET:
                     self.chatReceivers = set()
-                    (_etype63, _size60) = iprot.readSetBegin()
-                    for _i64 in range(_size60):
-                        _elem65 = PersonAccount()
-                        _elem65.read(iprot)
-                        self.chatReceivers.add(_elem65)
+                    (_etype76, _size73) = iprot.readSetBegin()
+                    for _i77 in range(_size73):
+                        _elem78 = PersonAccount()
+                        _elem78.read(iprot)
+                        self.chatReceivers.add(_elem78)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 261:
                 if ftype == TType.SET:
                     self.chatAccounts = set()
-                    (_etype69, _size66) = iprot.readSetBegin()
-                    for _i70 in range(_size66):
-                        _elem71 = PersonAccount()
-                        _elem71.read(iprot)
-                        self.chatAccounts.add(_elem71)
+                    (_etype82, _size79) = iprot.readSetBegin()
+                    for _i83 in range(_size79):
+                        _elem84 = PersonAccount()
+                        _elem84.read(iprot)
+                        self.chatAccounts.add(_elem84)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
@@ -1050,33 +1135,33 @@ class ProcessedItem(object):
             elif fid == 264:
                 if ftype == TType.SET:
                     self.incomingPhoneNumbers = set()
-                    (_etype75, _size72) = iprot.readSetBegin()
-                    for _i76 in range(_size72):
-                        _elem77 = PersonAccount()
-                        _elem77.read(iprot)
-                        self.incomingPhoneNumbers.add(_elem77)
+                    (_etype88, _size85) = iprot.readSetBegin()
+                    for _i89 in range(_size85):
+                        _elem90 = PersonAccount()
+                        _elem90.read(iprot)
+                        self.incomingPhoneNumbers.add(_elem90)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 265:
                 if ftype == TType.SET:
                     self.outgoingPhoneNumbers = set()
-                    (_etype81, _size78) = iprot.readSetBegin()
-                    for _i82 in range(_size78):
-                        _elem83 = PersonAccount()
-                        _elem83.read(iprot)
-                        self.outgoingPhoneNumbers.add(_elem83)
+                    (_etype94, _size91) = iprot.readSetBegin()
+                    for _i95 in range(_size91):
+                        _elem96 = PersonAccount()
+                        _elem96.read(iprot)
+                        self.outgoingPhoneNumbers.add(_elem96)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 266:
                 if ftype == TType.SET:
                     self.allPhoneNumbers = set()
-                    (_etype87, _size84) = iprot.readSetBegin()
-                    for _i88 in range(_size84):
-                        _elem89 = PersonAccount()
-                        _elem89.read(iprot)
-                        self.allPhoneNumbers.add(_elem89)
+                    (_etype100, _size97) = iprot.readSetBegin()
+                    for _i101 in range(_size97):
+                        _elem102 = PersonAccount()
+                        _elem102.read(iprot)
+                        self.allPhoneNumbers.add(_elem102)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
@@ -1093,10 +1178,10 @@ class ProcessedItem(object):
             elif fid == 269:
                 if ftype == TType.SET:
                     self.chatProtocol = set()
-                    (_etype93, _size90) = iprot.readSetBegin()
-                    for _i94 in range(_size90):
-                        _elem95 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
-                        self.chatProtocol.add(_elem95)
+                    (_etype106, _size103) = iprot.readSetBegin()
+                    for _i107 in range(_size103):
+                        _elem108 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                        self.chatProtocol.add(_elem108)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
@@ -1173,8 +1258,8 @@ class ProcessedItem(object):
         if self.rawData is not None:
             oprot.writeFieldBegin('rawData', TType.LIST, 11)
             oprot.writeListBegin(TType.STRUCT, len(self.rawData))
-            for iter96 in self.rawData:
-                iter96.write(oprot)
+            for iter109 in self.rawData:
+                iter109.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.contactName is not None:
@@ -1224,6 +1309,25 @@ class ProcessedItem(object):
         if self.isTopLevelParent is not None:
             oprot.writeFieldBegin('isTopLevelParent', TType.BOOL, 23)
             oprot.writeBool(self.isTopLevelParent)
+            oprot.writeFieldEnd()
+        if self.mediaTypeCategories is not None:
+            oprot.writeFieldBegin('mediaTypeCategories', TType.LIST, 24)
+            oprot.writeListBegin(TType.STRING, len(self.mediaTypeCategories))
+            for iter110 in self.mediaTypeCategories:
+                oprot.writeString(iter110.encode('utf-8') if sys.version_info[0] == 2 else iter110)
+            oprot.writeListEnd()
+            oprot.writeFieldEnd()
+        if self.sha1 is not None:
+            oprot.writeFieldBegin('sha1', TType.STRING, 25)
+            oprot.writeString(self.sha1.encode('utf-8') if sys.version_info[0] == 2 else self.sha1)
+            oprot.writeFieldEnd()
+        if self.sha256 is not None:
+            oprot.writeFieldBegin('sha256', TType.STRING, 26)
+            oprot.writeString(self.sha256.encode('utf-8') if sys.version_info[0] == 2 else self.sha256)
+            oprot.writeFieldEnd()
+        if self.sha512 is not None:
+            oprot.writeFieldBegin('sha512', TType.STRING, 27)
+            oprot.writeString(self.sha512.encode('utf-8') if sys.version_info[0] == 2 else self.sha512)
             oprot.writeFieldEnd()
         if self.binaryFile is not None:
             oprot.writeFieldBegin('binaryFile', TType.STRING, 51)
@@ -1308,15 +1412,15 @@ class ProcessedItem(object):
         if self.creators is not None:
             oprot.writeFieldBegin('creators', TType.LIST, 204)
             oprot.writeListBegin(TType.STRUCT, len(self.creators))
-            for iter97 in self.creators:
-                iter97.write(oprot)
+            for iter111 in self.creators:
+                iter111.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.contributors is not None:
             oprot.writeFieldBegin('contributors', TType.LIST, 205)
             oprot.writeListBegin(TType.STRUCT, len(self.contributors))
-            for iter98 in self.contributors:
-                iter98.write(oprot)
+            for iter112 in self.contributors:
+                iter112.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.organization is not None:
@@ -1338,64 +1442,64 @@ class ProcessedItem(object):
         if self.conversationIndexSet is not None:
             oprot.writeFieldBegin('conversationIndexSet', TType.SET, 253)
             oprot.writeSetBegin(TType.STRING, len(self.conversationIndexSet))
-            for iter99 in self.conversationIndexSet:
-                oprot.writeString(iter99.encode('utf-8') if sys.version_info[0] == 2 else iter99)
+            for iter113 in self.conversationIndexSet:
+                oprot.writeString(iter113.encode('utf-8') if sys.version_info[0] == 2 else iter113)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.messageFrom is not None:
             oprot.writeFieldBegin('messageFrom', TType.SET, 254)
             oprot.writeSetBegin(TType.STRUCT, len(self.messageFrom))
-            for iter100 in self.messageFrom:
-                iter100.write(oprot)
+            for iter114 in self.messageFrom:
+                iter114.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.messageSenders is not None:
             oprot.writeFieldBegin('messageSenders', TType.SET, 255)
             oprot.writeSetBegin(TType.STRUCT, len(self.messageSenders))
-            for iter101 in self.messageSenders:
-                iter101.write(oprot)
+            for iter115 in self.messageSenders:
+                iter115.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.messageTo is not None:
             oprot.writeFieldBegin('messageTo', TType.SET, 256)
             oprot.writeSetBegin(TType.STRUCT, len(self.messageTo))
-            for iter102 in self.messageTo:
-                iter102.write(oprot)
+            for iter116 in self.messageTo:
+                iter116.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.messageCc is not None:
             oprot.writeFieldBegin('messageCc', TType.SET, 257)
             oprot.writeSetBegin(TType.STRUCT, len(self.messageCc))
-            for iter103 in self.messageCc:
-                iter103.write(oprot)
+            for iter117 in self.messageCc:
+                iter117.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.messageBcc is not None:
             oprot.writeFieldBegin('messageBcc', TType.SET, 258)
             oprot.writeSetBegin(TType.STRUCT, len(self.messageBcc))
-            for iter104 in self.messageBcc:
-                iter104.write(oprot)
+            for iter118 in self.messageBcc:
+                iter118.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.chatSenders is not None:
             oprot.writeFieldBegin('chatSenders', TType.SET, 259)
             oprot.writeSetBegin(TType.STRUCT, len(self.chatSenders))
-            for iter105 in self.chatSenders:
-                iter105.write(oprot)
+            for iter119 in self.chatSenders:
+                iter119.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.chatReceivers is not None:
             oprot.writeFieldBegin('chatReceivers', TType.SET, 260)
             oprot.writeSetBegin(TType.STRUCT, len(self.chatReceivers))
-            for iter106 in self.chatReceivers:
-                iter106.write(oprot)
+            for iter120 in self.chatReceivers:
+                iter120.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.chatAccounts is not None:
             oprot.writeFieldBegin('chatAccounts', TType.SET, 261)
             oprot.writeSetBegin(TType.STRUCT, len(self.chatAccounts))
-            for iter107 in self.chatAccounts:
-                iter107.write(oprot)
+            for iter121 in self.chatAccounts:
+                iter121.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.isRead is not None:
@@ -1409,22 +1513,22 @@ class ProcessedItem(object):
         if self.incomingPhoneNumbers is not None:
             oprot.writeFieldBegin('incomingPhoneNumbers', TType.SET, 264)
             oprot.writeSetBegin(TType.STRUCT, len(self.incomingPhoneNumbers))
-            for iter108 in self.incomingPhoneNumbers:
-                iter108.write(oprot)
+            for iter122 in self.incomingPhoneNumbers:
+                iter122.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.outgoingPhoneNumbers is not None:
             oprot.writeFieldBegin('outgoingPhoneNumbers', TType.SET, 265)
             oprot.writeSetBegin(TType.STRUCT, len(self.outgoingPhoneNumbers))
-            for iter109 in self.outgoingPhoneNumbers:
-                iter109.write(oprot)
+            for iter123 in self.outgoingPhoneNumbers:
+                iter123.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.allPhoneNumbers is not None:
             oprot.writeFieldBegin('allPhoneNumbers', TType.SET, 266)
             oprot.writeSetBegin(TType.STRUCT, len(self.allPhoneNumbers))
-            for iter110 in self.allPhoneNumbers:
-                iter110.write(oprot)
+            for iter124 in self.allPhoneNumbers:
+                iter124.write(oprot)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.sourceIP is not None:
@@ -1438,8 +1542,8 @@ class ProcessedItem(object):
         if self.chatProtocol is not None:
             oprot.writeFieldBegin('chatProtocol', TType.SET, 269)
             oprot.writeSetBegin(TType.STRING, len(self.chatProtocol))
-            for iter111 in self.chatProtocol:
-                oprot.writeString(iter111.encode('utf-8') if sys.version_info[0] == 2 else iter111)
+            for iter125 in self.chatProtocol:
+                oprot.writeString(iter125.encode('utf-8') if sys.version_info[0] == 2 else iter125)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.chatConversationId is not None:
@@ -1575,21 +1679,21 @@ class ProcessedItemResult(object):
             elif fid == 3:
                 if ftype == TType.SET:
                     self.tags = set()
-                    (_etype115, _size112) = iprot.readSetBegin()
-                    for _i116 in range(_size112):
-                        _elem117 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
-                        self.tags.add(_elem117)
+                    (_etype129, _size126) = iprot.readSetBegin()
+                    for _i130 in range(_size126):
+                        _elem131 = iprot.readString().decode('utf-8', errors='replace') if sys.version_info[0] == 2 else iprot.readString()
+                        self.tags.add(_elem131)
                     iprot.readSetEnd()
                 else:
                     iprot.skip(ftype)
             elif fid == 4:
                 if ftype == TType.LIST:
                     self.customColumns = []
-                    (_etype121, _size118) = iprot.readListBegin()
-                    for _i122 in range(_size118):
-                        _elem123 = CustomColumn()
-                        _elem123.read(iprot)
-                        self.customColumns.append(_elem123)
+                    (_etype135, _size132) = iprot.readListBegin()
+                    for _i136 in range(_size132):
+                        _elem137 = CustomColumn()
+                        _elem137.read(iprot)
+                        self.customColumns.append(_elem137)
                     iprot.readListEnd()
                 else:
                     iprot.skip(ftype)
@@ -1619,15 +1723,15 @@ class ProcessedItemResult(object):
         if self.tags is not None:
             oprot.writeFieldBegin('tags', TType.SET, 3)
             oprot.writeSetBegin(TType.STRING, len(self.tags))
-            for iter124 in self.tags:
-                oprot.writeString(iter124.encode('utf-8') if sys.version_info[0] == 2 else iter124)
+            for iter138 in self.tags:
+                oprot.writeString(iter138.encode('utf-8') if sys.version_info[0] == 2 else iter138)
             oprot.writeSetEnd()
             oprot.writeFieldEnd()
         if self.customColumns is not None:
             oprot.writeFieldBegin('customColumns', TType.LIST, 4)
             oprot.writeListBegin(TType.STRUCT, len(self.customColumns))
-            for iter125 in self.customColumns:
-                iter125.write(oprot)
+            for iter139 in self.customColumns:
+                iter139.write(oprot)
             oprot.writeListEnd()
             oprot.writeFieldEnd()
         if self.importedText is not None:
@@ -1878,10 +1982,10 @@ FoundItem.thrift_spec = (
     (6, TType.STRING, 'mediaType', 'UTF8', None, ),  # 6
     (7, TType.STRING, 'fsPath', 'UTF8', None, ),  # 7
     (8, TType.BOOL, 'isTopLevelParent', None, None, ),  # 8
-    None,  # 9
-    None,  # 10
-    None,  # 11
-    None,  # 12
+    (9, TType.LIST, 'mediaTypeCategories', (TType.STRING, 'UTF8', False), None, ),  # 9
+    (10, TType.STRING, 'sha1', 'UTF8', None, ),  # 10
+    (11, TType.STRING, 'sha256', 'UTF8', None, ),  # 11
+    (12, TType.STRING, 'sha512', 'UTF8', None, ),  # 12
     None,  # 13
     None,  # 14
     None,  # 15
@@ -1948,10 +2052,10 @@ ProcessedItem.thrift_spec = (
     (21, TType.BOOL, 'embeddedImage', None, None, ),  # 21
     (22, TType.STRING, 'fsPath', 'UTF8', None, ),  # 22
     (23, TType.BOOL, 'isTopLevelParent', None, None, ),  # 23
-    None,  # 24
-    None,  # 25
-    None,  # 26
-    None,  # 27
+    (24, TType.LIST, 'mediaTypeCategories', (TType.STRING, 'UTF8', False), None, ),  # 24
+    (25, TType.STRING, 'sha1', 'UTF8', None, ),  # 25
+    (26, TType.STRING, 'sha256', 'UTF8', None, ),  # 26
+    (27, TType.STRING, 'sha512', 'UTF8', None, ),  # 27
     None,  # 28
     None,  # 29
     None,  # 30
